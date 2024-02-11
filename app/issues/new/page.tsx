@@ -23,6 +23,14 @@ export default function NewIssuePage() {
     const router = useRouter()
     const [error, setError] = useState("")
 
+    const onSubmit = handleSubmit(async (data) => {
+        try {
+            await axios.post("/api/issues", data)
+            router.push("/issues")
+        } catch (error) {
+            setError("An unexpected error has occurred.")
+        }
+    })
 
     return (
         <div className="max-w-xl ">
@@ -31,15 +39,7 @@ export default function NewIssuePage() {
                     {error}
                 </Callout.Text>
             </Callout.Root>}
-            <form className='space-y-3' onSubmit={handleSubmit(async (data) => {
-                try {
-                    await axios.post("/api/issues", data)
-                    router.push("/issues")
-                } catch (error) {
-                    setError("An unexpected error has occurred.")
-                }
-            }
-            )}>
+            <form className='space-y-3' onSubmit={onSubmit}>
                 <TextField.Root>
                     <TextField.Input placeholder='Title' {...register("title")} />
                 </TextField.Root>
@@ -48,6 +48,6 @@ export default function NewIssuePage() {
                 <ErrorMessage >{errors.description?.message} </ErrorMessage>
                 <Button ml={"auto"} disabled={isSubmitting}>Submit New Issue {isSubmitting && <Spinner />}</Button>
 
-            </form ></div>
+            </form ></div >
     )
 }
