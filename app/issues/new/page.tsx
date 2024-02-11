@@ -11,12 +11,13 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { createIssueSchema } from '@/app/validationSchemas';
 import { z } from 'zod';
 import ErrorMessage from '@/app/components/ErrorMessage';
+import Spinner from '@/app/components/Spinner';
 
 type IssueForm = z.infer<typeof createIssueSchema>
 
 export default function NewIssuePage() {
 
-    const { register, control, handleSubmit, formState: { errors } } = useForm<IssueForm>({
+    const { register, control, handleSubmit, formState: { errors, isSubmitting } } = useForm<IssueForm>({
         resolver: zodResolver(createIssueSchema)
     })
     const router = useRouter()
@@ -45,7 +46,7 @@ export default function NewIssuePage() {
                 <ErrorMessage  >{errors.title?.message} </ErrorMessage>
                 <Controller name='description' control={control} render={({ field }) => <SimpleMDE placeholder='Description' {...field} />} />
                 <ErrorMessage >{errors.description?.message} </ErrorMessage>
-                <Button ml={"auto"}>Submit New Issue</Button>
+                <Button ml={"auto"} disabled={isSubmitting}>Submit New Issue {isSubmitting && <Spinner />}</Button>
 
             </form ></div>
     )
