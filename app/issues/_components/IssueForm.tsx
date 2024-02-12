@@ -7,19 +7,19 @@ import "easymde/dist/easymde.min.css";
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { createIssueSchema } from '@/app/validationSchemas';
+import { issueSchema } from '@/app/validationSchemas';
 import { z } from 'zod';
 import { ErrorMessage, Spinner } from '@/app/components';
 import delay from "delay"
 import { Issue } from '@prisma/client';
-type IssueForm = z.infer<typeof createIssueSchema>
+type IssueForm = z.infer<typeof issueSchema>
 
 const SimpleMDE = dynamic(() => import("react-simplemde-editor"), { ssr: false })
 
 export default async function IssueForm({ issue }: { issue?: Issue }) {
 
     const { register, control, handleSubmit, formState: { errors, isSubmitting } } = useForm<IssueForm>({
-        resolver: zodResolver(createIssueSchema)
+        resolver: zodResolver(issueSchema)
     })
     const router = useRouter()
     const [error, setError] = useState("")
@@ -42,7 +42,7 @@ export default async function IssueForm({ issue }: { issue?: Issue }) {
             </Callout.Root>}
             <form className='space-y-3' onSubmit={onSubmit}>
                 <TextField.Root>
-                    <TextField.Input placeholder='Title' {...register("title")} />
+                    <TextField.Input defaultValue={issue?.title} placeholder='Title' {...register("title")} />
                 </TextField.Root>
                 <ErrorMessage  >{errors.title?.message} </ErrorMessage>
                 <Controller name='description' control={control} render={({ field }) => <SimpleMDE placeholder='Description' {...field} />} />
