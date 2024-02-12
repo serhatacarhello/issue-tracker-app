@@ -11,7 +11,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { createIssueSchema } from '@/app/validationSchemas';
 import { z } from 'zod';
 import { ErrorMessage, Spinner } from '@/app/components';
-
+import delay from "delay"
 type IssueForm = z.infer<typeof createIssueSchema>
 
 const SimpleMDE = dynamic(() => import("react-simplemde-editor"), { ssr: false })
@@ -33,6 +33,7 @@ export default async function NewIssuePage() {
             setError("An unexpected error has occurred.")
         }
     })
+    await delay(500)
     return (
         <div className="max-w-xl ">
             {error && <Callout.Root color='red' className='mb-3'>
