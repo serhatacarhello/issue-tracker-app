@@ -1,12 +1,9 @@
-import React from 'react'
 import IssueActions from './IssueActions';
 import { Table } from '@radix-ui/themes';
-import Skeleton from "react-loading-skeleton"
-import 'react-loading-skeleton/dist/skeleton.css';
+import { Skeleton } from "@/app/components"
+
 export default function LoadingNewIssuePage() {
     const issues = [1, 2, 3, 4, 5];
-
-
     return (
         <div>
             {/* new issue btn */}

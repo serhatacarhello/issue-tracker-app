@@ -1,6 +1,7 @@
 
 import { Status } from "@prisma/client";
 import { Badge } from "@radix-ui/themes";
+import { AiFillBug } from "react-icons/ai";
 
 
 const StatusMap: Record<Status, { label: string, color: "red" | "violet" | "green" }> = {
@@ -13,6 +14,6 @@ const StatusMap: Record<Status, { label: string, color: "red" | "violet" | "gree
 export default function IssueStatusBadge({ status }: { status: Status }) {
     return (
         <Badge color={StatusMap[status].color}
-        > {StatusMap[status].label}</Badge>
+        > {StatusMap[status].label}<AiFillBug className={`text-${StatusMap[status].color}-500`} /> </Badge>
     )
 }

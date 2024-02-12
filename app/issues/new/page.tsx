@@ -1,6 +1,6 @@
 
 "use client"
-import { Button, Callout, Text, TextField, } from '@radix-ui/themes'
+import { Button, Callout, TextField, } from '@radix-ui/themes'
 import dynamic from 'next/dynamic';
 import { useForm, Controller } from "react-hook-form"
 import axios from 'axios';
@@ -10,9 +10,7 @@ import { useState } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { createIssueSchema } from '@/app/validationSchemas';
 import { z } from 'zod';
-import ErrorMessage from '@/app/components/ErrorMessage';
-import Spinner from '@/app/components/Spinner';
-import delay from 'delay';
+import { ErrorMessage, Spinner } from '@/app/components';
 
 type IssueForm = z.infer<typeof createIssueSchema>
 
@@ -35,7 +33,6 @@ export default async function NewIssuePage() {
             setError("An unexpected error has occurred.")
         }
     })
-    await delay(500)
     return (
         <div className="max-w-xl ">
             {error && <Callout.Root color='red' className='mb-3'>
