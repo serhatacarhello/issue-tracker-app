@@ -4,6 +4,7 @@ import { Flex, Heading, Text, Card } from '@radix-ui/themes'
 import ReactMarkdown from 'react-markdown';
 
 export default function IssueDetails({ issue }: { issue: Issue }) {
+    
     return (
         <>
             <Heading>{issue.title} </Heading>

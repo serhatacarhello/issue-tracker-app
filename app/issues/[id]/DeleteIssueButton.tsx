@@ -3,29 +3,31 @@
 import { AlertDialog, Button, Flex } from '@radix-ui/themes'
 import axios from 'axios'
 import { useRouter } from 'next/navigation'
-import React, { useState } from 'react'
-
+import { useState } from 'react'
+import { Spinner } from '@/app/components'
 
 
 export default function DeleteIssueButton({ issueId }: { issueId: number }) {
 
     const router = useRouter()
     const [error, setError] = useState(false)
+    const [isDeleting, setDeleting] = useState(false)
 
     const deleteIssue = async () => {
         try {
+            setDeleting(true)
             await axios.delete("/api/issues/" + issueId)
             router.push("/issues")
             router.refresh()
-
         } catch (error) {
+            setDeleting(false)
             setError(true)
         }
     }
     return (
         <>    <AlertDialog.Root>
             <AlertDialog.Trigger>
-                <Button color="red">Delete Issue</Button>
+                <Button color="red" disabled={isDeleting}>Delete Issue {isDeleting && <Spinner color='black' />} </Button>
             </AlertDialog.Trigger>
             <AlertDialog.Content style={{ maxWidth: 450 }}>
                 <AlertDialog.Title>Confirm Deletion</AlertDialog.Title>
@@ -41,7 +43,6 @@ export default function DeleteIssueButton({ issueId }: { issueId: number }) {
                     </AlertDialog.Cancel>
                     <AlertDialog.Action>
                         <Button variant="solid" color="red" onClick={deleteIssue}>
-
                             Delete Issue
                         </Button>
                     </AlertDialog.Action>
@@ -55,7 +56,6 @@ export default function DeleteIssueButton({ issueId }: { issueId: number }) {
                     <AlertDialog.Description size="2">
                         This issue could not be deleted.
                     </AlertDialog.Description>
-
                     <Button variant="soft" color="gray" mt={"2"} onClick={() => setError(false)}>
                         OK
                     </Button>
