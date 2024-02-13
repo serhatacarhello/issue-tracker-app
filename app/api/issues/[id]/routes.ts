@@ -27,7 +27,7 @@ export async function PATCH(request: NextRequest, { params }: { params: { id: st
         title: body.title,
         description:body.description}
     })
-
+console.log(updatedIssue)
     return NextResponse.json(updatedIssue)
     
 }
