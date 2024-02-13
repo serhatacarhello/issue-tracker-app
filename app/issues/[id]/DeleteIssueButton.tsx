@@ -3,15 +3,27 @@
 import { AlertDialog, Button, Flex } from '@radix-ui/themes'
 import axios from 'axios'
 import { useRouter } from 'next/navigation'
-import React from 'react'
+import React, { useState } from 'react'
 
 
 
 export default function DeleteIssueButton({ issueId }: { issueId: number }) {
 
     const router = useRouter()
+    const [error, setError] = useState(false)
+
+    const deleteIssue = async () => {
+        try {
+            await axios.delete("/api/issues/" + issueId)
+            router.push("/issues")
+            router.refresh()
+
+        } catch (error) {
+            setError(true)
+        }
+    }
     return (
-        <AlertDialog.Root>
+        <>    <AlertDialog.Root>
             <AlertDialog.Trigger>
                 <Button color="red">Delete Issue</Button>
             </AlertDialog.Trigger>
@@ -28,18 +40,27 @@ export default function DeleteIssueButton({ issueId }: { issueId: number }) {
                         </Button>
                     </AlertDialog.Cancel>
                     <AlertDialog.Action>
-                        <Button variant="solid" color="red" onClick={async () => {
-                            await axios.delete(`/api/issues/${issueId}`)
-                            router.push("/issues")
-                            router.refresh()
-                        }
-                        }>
+                        <Button variant="solid" color="red" onClick={deleteIssue}>
 
                             Delete Issue
                         </Button>
                     </AlertDialog.Action>
                 </Flex>
             </AlertDialog.Content>
+            {/* error dialog */}
         </AlertDialog.Root>
+            <AlertDialog.Root open={error}>
+                <AlertDialog.Content style={{ maxWidth: 450 }}>
+                    <AlertDialog.Title>Error</AlertDialog.Title>
+                    <AlertDialog.Description size="2">
+                        This issue could not be deleted.
+                    </AlertDialog.Description>
+
+                    <Button variant="soft" color="gray" mt={"2"} onClick={() => setError(false)}>
+                        OK
+                    </Button>
+                </AlertDialog.Content>
+            </AlertDialog.Root>
+        </>
     )
 }
