@@ -12,6 +12,8 @@ import { z } from 'zod';
 import { ErrorMessage, Spinner } from '@/app/components';
 import delay from "delay"
 import { Issue } from '@prisma/client';
+
+
 type IssueForm = z.infer<typeof issueSchema>
 
 const SimpleMDE = dynamic(() => import("react-simplemde-editor"), { ssr: false })
@@ -24,12 +26,16 @@ export default async function IssueForm({ issue }: { issue?: Issue }) {
     const router = useRouter()
     const [error, setError] = useState("")
 
+
     const onSubmit = handleSubmit(async (data) => {
         try {
-            if (issue) await axios.patch("api/issues/" + issue.id, data);
+            console.log(isSubmitting, "issubmitting")
+            if (issue) await axios.patch("/api/issues/" + issue.id, data);
             else await axios.post("/api/issues", data)
             router.push("/issues")
             router.refresh()
+            console.log(isSubmitting, "issubmitting")
+
         } catch (error) {
             setError("An unexpected error has occurred.")
         }
