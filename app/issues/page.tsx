@@ -30,3 +30,6 @@ export default async function IssuesPage() {
         </Table.Root>
     </div>;
 }
+
+
+export const dynamic ="force-dynamic"
