@@ -5,6 +5,7 @@ import { NextRequest, NextResponse } from "next/server";
 export async function PATCH(request: NextRequest, { params }: { params: { id: string } }) {
     
     const body = await request.json()
+    console.log("🚀 ~ PATCH ~ body:", body)
 
     if (!body) {
     return NextResponse.json({ error: "Invalid request body" }, { status: 400 });
@@ -31,3 +32,15 @@ console.log(updatedIssue)
     return NextResponse.json(updatedIssue)
     
 }
+
+export async function DELETE(request: NextRequest, { params }: { params: { id: string } }) {
+
+    const issue = await prisma.issue.findUnique({ where: { id: parseInt(params.id) } })
+
+    if (!issue) return NextResponse.json({ error: "Invalid issue" }, { status: 404 })
+    
+    await prisma.issue.delete({ where: { id: issue.id } })    
+
+    return NextResponse.json({}) 
+}
+

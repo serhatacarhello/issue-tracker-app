@@ -3,16 +3,14 @@ import { Button, Callout, TextField, } from '@radix-ui/themes'
 import dynamic from 'next/dynamic';
 import { useForm, Controller } from "react-hook-form"
 import axios from 'axios';
-import "easymde/dist/easymde.min.css";
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { issueSchema } from '@/app/validationSchemas';
 import { z } from 'zod';
 import { ErrorMessage, Spinner } from '@/app/components';
-import delay from "delay"
 import { Issue } from '@prisma/client';
-
+import "easymde/dist/easymde.min.css";
 
 type IssueForm = z.infer<typeof issueSchema>
 
@@ -26,21 +24,17 @@ export default async function IssueForm({ issue }: { issue?: Issue }) {
     const router = useRouter()
     const [error, setError] = useState("")
 
-
     const onSubmit = handleSubmit(async (data) => {
         try {
-            console.log(isSubmitting, "issubmitting")
             if (issue) await axios.patch("/api/issues/" + issue.id, data);
             else await axios.post("/api/issues", data)
             router.push("/issues")
             router.refresh()
-            console.log(isSubmitting, "issubmitting")
-
         } catch (error) {
+            console.log("🚀 ~ onSubmit ~ error:", error)
             setError("An unexpected error has occurred.")
         }
     })
-    await delay(500)
     return (
         <div className="max-w-xl ">
             {error && <Callout.Root color='red' className='mb-3'>
