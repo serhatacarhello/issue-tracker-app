@@ -26,9 +26,12 @@ export default async function IssueForm({ issue }: { issue?: Issue }) {
 
     const onSubmit = handleSubmit(async (data) => {
         try {
-            if (issue) await axios.patch("/api/issues/" + issue.id, data);
+            if (issue) {              
+                await axios.patch(`/api/issues/${issue.id}`, data);
+            }
+
             else await axios.post("/api/issues", data)
-            router.push("/issues")
+            router.push("/issues/list")
             router.refresh()
         } catch (error) {
             console.log("🚀 ~ onSubmit ~ error:", error)

@@ -2,10 +2,12 @@ import { issueSchema } from "@/app/validationSchemas"
 import prisma from "@/prisma/db"
 import { NextRequest, NextResponse } from "next/server";
 
-export async function PATCH(request: NextRequest, { params }: { params: { id: string } }) {
-    
+export async function PATCH(
+  request: NextRequest, 
+  { params }: { params: { id: string }}) {
+    console.log(params, "patch")
+
     const body = await request.json()
-    console.log("🚀 ~ PATCH ~ body:", body)
 
     if (!body) {
     return NextResponse.json({ error: "Invalid request body" }, { status: 400 });

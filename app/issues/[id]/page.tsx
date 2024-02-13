@@ -5,6 +5,7 @@ import IssueDetails from './IssueDetails'
 import EditIssueButton from './EditIssueButton'
 import DeleteIssueButton from './DeleteIssueButton'
 import delay from "delay"
+
 interface Props {
     params: { id: string }
 }

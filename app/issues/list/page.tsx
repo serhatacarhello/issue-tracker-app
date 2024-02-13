@@ -1,5 +1,5 @@
 import { Table } from "@radix-ui/themes";
-import prisma from "../../prisma/db";
+import prisma from "../../../prisma/db";
 import { IssueStatusBadge, Link } from "@/app/components";
 import IssueActions from "./IssueActions";
 export default async function IssuesPage() {
@@ -32,4 +32,4 @@ export default async function IssuesPage() {
 }
 
 
-export const dynamic ="force-dynamic"
+export const dynamic = "force-dynamic"
