@@ -1,4 +1,16 @@
 -- CreateTable
+CREATE TABLE `Issue` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `title` VARCHAR(255) NOT NULL,
+    `description` TEXT NOT NULL,
+    `status` ENUM('OPEN', 'IN_PROGRESS', 'CLOSED') NOT NULL DEFAULT 'OPEN',
+    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `updatedAt` DATETIME(3) NOT NULL,
+
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
 CREATE TABLE `Account` (
     `id` VARCHAR(191) NOT NULL,
     `userId` VARCHAR(191) NOT NULL,
@@ -7,7 +19,7 @@ CREATE TABLE `Account` (
     `providerAccountId` VARCHAR(191) NOT NULL,
     `refresh_token` TEXT NULL,
     `access_token` TEXT NULL,
-    `expires_at` DATETIME(3) NOT NULL,
+    `expires_at` INTEGER NULL,
     `token_type` VARCHAR(191) NULL,
     `scope` VARCHAR(191) NULL,
     `id_token` TEXT NULL,
