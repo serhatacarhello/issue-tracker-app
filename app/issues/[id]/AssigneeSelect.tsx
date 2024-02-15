@@ -5,11 +5,9 @@ import { User } from "@prisma/client";
 import { Select } from "@radix-ui/themes";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { useState } from "react";
-import Skeleton from "react-loading-skeleton";
+import {Skeleton} from "@/app/components";
 
 export default function AssigneeSelect() {
-
 
     const { data: users, error, isLoading } = useQuery<User[]>({
         queryKey: ["users"],
