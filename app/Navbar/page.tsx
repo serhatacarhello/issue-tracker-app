@@ -40,8 +40,6 @@ export default function Navbar() {
     const { data: session, status } = useSession()
     if (status === "loading") return <Skeleton width={"3rem"} />
     if (status === "unauthenticated") return <Link href={"/api/auth/signin"}>Sing In</Link>
-
-
     return (
       <Box>
         <DropdownMenu.Root>
