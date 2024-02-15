@@ -26,7 +26,7 @@ export default async function IssueForm({ issue }: { issue?: Issue }) {
 
     const onSubmit = handleSubmit(async (data) => {
         try {
-            if (issue) {              
+            if (issue) {
                 await axios.patch(`/api/issues/${issue.id}`, data);
             }
 
