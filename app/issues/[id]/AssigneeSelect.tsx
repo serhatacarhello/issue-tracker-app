@@ -18,11 +18,8 @@ export default function AssigneeSelect() {
     if (isLoading) return <Skeleton />
 
     if (error) {
-        console.log(error)
         return null
     }
-    console.log("🚀 ~ AssigneeSelect ~ users:", users)
-
     return (
         <Select.Root>
             <Select.Trigger placeholder='Assign...' />
