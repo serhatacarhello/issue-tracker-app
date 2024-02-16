@@ -11,7 +11,6 @@ interface Props {
 export default async function IssuesPage({ searchParams, }: Props) {
 
     const statuses = Object.values(Status)
-    console.log("🚀 ~ IssuesPage ~ statuses:", statuses)
 
     const status = statuses.includes(searchParams.status) ? searchParams.status : undefined;
 
