@@ -12,6 +12,7 @@ export default function AssigneeSelect({ issue }: { issue: Issue }) {
 
     const { data: users, error, isLoading } = useUsers();
     if (isLoading) return <Skeleton />
+    console.log("🚀 ~ AssigneeSelect ~ users:", users)
 
     if (error) {
         return null
@@ -36,6 +37,7 @@ export default function AssigneeSelect({ issue }: { issue: Issue }) {
                     <Select.Group>
                         <Select.Label>Suggestions</Select.Label>
                         <Select.Item value="">Unassigned</Select.Item>
+                        <Select.Item value="1">Serhat ACAR</Select.Item>
                         {users?.map(user => (
                             <Select.Item key={user.id} value={user.id}>{user.name}</Select.Item>)
                         )}
@@ -53,6 +55,6 @@ const useUsers = () => {
         queryKey: ["users"],
         queryFn: () => axios.get("/api/users").then(res => res.data),
         staleTime: 60 * 1000,
-        retry: 3
+        retry: 3,
     })
 }
