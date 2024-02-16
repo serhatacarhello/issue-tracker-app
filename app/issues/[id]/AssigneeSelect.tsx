@@ -32,12 +32,11 @@ export default function AssigneeSelect({ issue }: { issue: Issue }) {
     return (
         <>
             <Select.Root defaultValue={issue.assignedToUserId || ""} onValueChange={assignIssue}>
-                <Select.Trigger aria-placeholder="Assign..." />
+                <Select.Trigger aria-placeholder="Assign" placeholder="Assign..." />
                 <Select.Content>
                     <Select.Group>
                         <Select.Label>Suggestions</Select.Label>
                         <Select.Item value="">Unassigned</Select.Item>
-                        <Select.Item value="1">Serhat ACAR</Select.Item>
                         {users?.map(user => (
                             <Select.Item key={user.id} value={user.id}>{user.name}</Select.Item>)
                         )}
