@@ -13,6 +13,7 @@ interface Props {
     params: { id: string }
 }
 export default async function IssueDetailPage({ params }: Props) {
+    
     const session = await getServerSession(authOptions)
 
     const issue = await prisma.issue.findUnique({ where: { id: parseInt(params.id) }, })
@@ -28,7 +29,7 @@ export default async function IssueDetailPage({ params }: Props) {
             </Box>
             {session && <Box>
                 <Flex direction={"column"} gap={"4"}>
-                    <AssigneeSelect />
+                    <AssigneeSelect issue={issue} />
                     <EditIssueButton issueId={issue.id} />
                     <DeleteIssueButton issueId={issue.id} />
                 </Flex>
