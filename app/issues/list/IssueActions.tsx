@@ -4,7 +4,7 @@ import IssueStatusFilter from './IssueStatusFilter'
 
 export default function IssueActions() {
     return (
-        <Flex mb={"5"} justify={'between'} align={'center'}>
+        <Flex justify={'between'} align={'center'}>
             <IssueStatusFilter />
             <Button>
                 <Link href={"/issues/new"}>
