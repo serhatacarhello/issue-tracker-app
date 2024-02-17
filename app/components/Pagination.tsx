@@ -27,8 +27,8 @@ export default function Pagination({ itemCount, currentPage, pageSize }: Props) 
 
     return (
         <Flex align={'center'} gap={'2'}>
-            <Text size={'2'}>
-                Page {currentPage} of{pageCount}
+            <Text size={'2'} weight={"medium"}>
+                Page {currentPage} of {pageCount}
             </Text>
             <Button color='gray'
                 variant='soft'

@@ -50,7 +50,8 @@ export default async function IssueForm({ issue }: { issue?: Issue }) {
                     <TextField.Input defaultValue={issue?.title} placeholder='Title' {...register("title")} />
                 </TextField.Root>
                 <ErrorMessage  >{errors.title?.message} </ErrorMessage>
-                <Controller name='description' control={control} render={({ field }) => <SimpleMDE placeholder='Description' {...field} />} />
+
+                <Controller name='description' control={control} defaultValue={issue?.description} render={({ field }) => <SimpleMDE placeholder='Description'  {...field} />} />
                 <ErrorMessage >{errors.description?.message} </ErrorMessage>
                 <Button ml={"auto"} disabled={isSubmitting}> {issue ? "Update Issue" : "Submit New Issue"} {isSubmitting && <Spinner />}</Button>
 
