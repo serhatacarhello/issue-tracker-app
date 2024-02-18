@@ -8,16 +8,20 @@ import delay from "delay"
 import authOptions from '@/app/auth/authOptions'
 import { getServerSession } from 'next-auth'
 import AssigneeSelect from './AssigneeSelect'
-import axios from 'axios'
+import { cache } from 'react'
 
 interface Props {
     params: { id: string }
 }
+
+const fetchIssue = cache(async (issueId: number) =>
+    await prisma.issue.findUnique({ where: { id: issueId } })
+)
 export default async function IssueDetailPage({ params }: Props) {
 
     const session = await getServerSession(authOptions)
 
-    const issue = await prisma.issue.findUnique({ where: { id: parseInt(params.id) }, })
+    const issue = await fetchIssue(parseInt(params.id))
 
     if (!issue) notFound()
 
@@ -43,7 +47,7 @@ export async function generateMetadata(
     { params }: Props,
 ) {
     // fetch data
-    const issue = await prisma.issue.findUnique({ where: { id: parseInt(params.id) } })
+    const issue = await fetchIssue(parseInt(params.id))
 
     return {
         title: issue?.title,

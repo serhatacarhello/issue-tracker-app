@@ -1,5 +1,4 @@
 "use client";
-import { HamburgerMenuIcon } from "@radix-ui/react-icons";
 import { Avatar, Box, Container, DropdownMenu, Flex, Text } from "@radix-ui/themes";
 import classNames from "classnames";
 import { useSession } from "next-auth/react";
