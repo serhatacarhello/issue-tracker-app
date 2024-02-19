@@ -25,11 +25,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" >
+    <html lang="en" suppressHydrationWarning>
       <body className={inter.variable}>
         <QueryClientProvider>
           <AuthProvider>
-            <Theme appearance="light" accentColor="violet">
+            <Theme accentColor="violet">
               <Navbar />
               <main className='p-5'>
                 < Container>
