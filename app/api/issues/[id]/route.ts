@@ -71,7 +71,6 @@ export async function DELETE(
   const issue = await prisma.issue.findUnique({
     where: { id: parseInt(params.id) },
   });
-  console.log(issue, "delete");
   if (!issue)
     return NextResponse.json({ error: "Invalid issue" }, { status: 404 });
 

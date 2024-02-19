@@ -17,7 +17,6 @@ export default function AssigneeSelect({ issue }: { issue: Issue }) {
 
 
     const assignIssue = async (userId: string) => {
-        console.log("🚀 ~ assignIssue ~ userId:", userId)
         await axios.patch('/api/issues/' + issue.id, {
             assignedToUserId: userId || null,
         }).then(() => { userId ? toast.success(`Successfully assigned`) : toast.success(`Successfully unassigned`) }).catch(() => {

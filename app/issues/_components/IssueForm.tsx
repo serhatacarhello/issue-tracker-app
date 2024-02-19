@@ -34,7 +34,6 @@ export default async function IssueForm({ issue }: { issue?: Issue }) {
             router.push("/issues/list")
             router.refresh()
         } catch (error) {
-            console.log("🚀 ~ onSubmit ~ error:", error)
             setError("An unexpected error has occurred.")
         }
     })
