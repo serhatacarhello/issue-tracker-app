@@ -22,7 +22,7 @@ export default function IssueTable({ searchParams, issues }: Props) {
             <Table.Row>
                 {columns.map((column) => (
                     <Table.ColumnHeaderCell key={column.value} className={column.className}>
-                        <Link href={{
+                        <Link className='nav-link' href={{
                             query: { ...searchParams, orderBy: column.value }
                         }}>
 

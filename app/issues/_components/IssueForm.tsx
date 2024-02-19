@@ -39,24 +39,39 @@ export default async function IssueForm({ issue }: { issue?: Issue }) {
         }
     })
     return (
-        <div className="max-w-xl ">
-            {error && <Callout.Root color='red' className='mb-3'>
-                <Callout.Text>
-                    {error}
-                </Callout.Text>
-            </Callout.Root>}
-            <form className='space-y-3' onSubmit={onSubmit}>
-                <TextField.Root>
-                    <TextField.Input defaultValue={issue?.title} placeholder='Title' {...register("title")} />
-                </TextField.Root>
-                <ErrorMessage  >{errors.title?.message} </ErrorMessage>
+      <div className="max-w-xl ">
+        {error && (
+          <Callout.Root color="red" className="mb-3">
+            <Callout.Text>{error}</Callout.Text>
+          </Callout.Root>
+        )}
 
-                <Controller name='description' control={control} defaultValue={issue?.description} render={({ field }) => <SimpleMDE placeholder='Description'  {...field} />} />
-                <ErrorMessage >{errors.description?.message} </ErrorMessage>
-                <Button ml={"auto"} disabled={isSubmitting}> {issue ? "Update Issue" : "Submit New Issue"} {isSubmitting && <Spinner />}</Button>
+        <form className="space-y-3" onSubmit={onSubmit}>
+          <TextField.Root>
+            <TextField.Input
+              defaultValue={issue?.title}
+              placeholder="Title"
+              {...register("title")}
+            />
+          </TextField.Root>
+          <ErrorMessage>{errors.title?.message} </ErrorMessage>
 
-            </form >
-        </div >
-    )
+          <Controller
+            name="description"
+            control={control}
+            defaultValue={issue?.description}
+            render={({ field }) => (
+              <SimpleMDE placeholder="Description" {...field} />
+            )}
+          />
+          <ErrorMessage>{errors.description?.message} </ErrorMessage>
+          <Button ml={"auto"} disabled={isSubmitting}>
+            {" "}
+            {issue ? "Update Issue" : "Submit New Issue"}{" "}
+            {isSubmitting && <Spinner />}
+          </Button>
+        </form>
+      </div>
+    );
 }
 

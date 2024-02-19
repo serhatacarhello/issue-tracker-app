@@ -1,4 +1,3 @@
-
 "use client"
 
 import { Skeleton } from "@/app/components";
@@ -11,20 +10,21 @@ import toast, { Toaster } from "react-hot-toast"
 export default function AssigneeSelect({ issue }: { issue: Issue }) {
 
     const { data: users, error, isLoading } = useUsers();
+
     if (isLoading) return <Skeleton />
-    console.log("🚀 ~ AssigneeSelect ~ users:", users)
 
-    if (error) {
-        return null
-    }
+    if (error) return null
 
 
-    const assignIssue = (userId: string) => {
-        axios.patch('/api/issues' + issue.id, {
-            assignedToUserId: userId || null
-        }).catch(() => {
+    const assignIssue = async (userId: string) => {
+        console.log("🚀 ~ assignIssue ~ userId:", userId)
+        await axios.patch('/api/issues/' + issue.id, {
+            assignedToUserId: userId || null,
+        }).then(() => { userId ? toast.success(`Successfully assigned`) : toast.success(`Successfully unassigned`) }).catch(() => {
             toast.error("Changes could not be saved.")
         })
+
+
     }
 
 

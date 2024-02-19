@@ -4,7 +4,6 @@ import { Box, Flex, Grid } from '@radix-ui/themes'
 import IssueDetails from './IssueDetails'
 import EditIssueButton from './EditIssueButton'
 import DeleteIssueButton from './DeleteIssueButton'
-import delay from "delay"
 import authOptions from '@/app/auth/authOptions'
 import { getServerSession } from 'next-auth'
 import AssigneeSelect from './AssigneeSelect'
@@ -17,6 +16,9 @@ interface Props {
 const fetchIssue = cache(async (issueId: number) =>
     await prisma.issue.findUnique({ where: { id: issueId } })
 )
+
+
+
 export default async function IssueDetailPage({ params }: Props) {
 
     const session = await getServerSession(authOptions)
@@ -25,7 +27,6 @@ export default async function IssueDetailPage({ params }: Props) {
 
     if (!issue) notFound()
 
-    await delay(1000)
 
     return (
         <Grid columns={{ initial: "1", sm: "5" }} gap={"5"}>
