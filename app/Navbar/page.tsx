@@ -11,6 +11,7 @@ import Skeleton from "react-loading-skeleton";
 export default function Navbar() {
 
 
+  //nav links
   const NavLinks = () => {
     const currentPath = usePathname()
     const links = [
@@ -18,7 +19,7 @@ export default function Navbar() {
       { label: "Issues", href: "/issues/list" },
     ];
 
-    return (<ul className="flex  space-x-6 ">
+    return (<ul className="flex  text-lg">
       {links.map((link) => (
         <li key={link.href}>
           <Link

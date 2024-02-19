@@ -18,8 +18,8 @@ body {
   color: rgb(var(--foreground-rgb));
 }
 
-@layer utilities{
+@layer utilities {
   .nav-link {
-    @apply text-zinc-500 hover:text-zinc-800 transition-colors;
+    @apply text-zinc-500 hover:text-zinc-800 transition-colors  hover:bg-purple-100 px-4 py-2 rounded-full;
   }
 }
